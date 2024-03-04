@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { loginUrl } from "../utils";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
 	const emailRef = useRef<HTMLInputElement>(null);
@@ -82,15 +83,21 @@ export default function LoginPage() {
 							</button>
 							<p className="text-sm font-light text-gray-400">
 								Need a patient account?{" "}
-								<span className="font-medium text-primary-500 hover:underline">
+								<Link
+									className="font-medium text-primary-500 hover:underline"
+									to="/patient-signup"
+								>
 									Patient Sign Up
-								</span>
+								</Link>
 							</p>
 							<span className="text-sm font-light text-gray-400">
 								Need a medic account?{" "}
-								<span className="font-medium text-primary-500 hover:underline">
+								<Link
+									className="font-medium text-primary-500 hover:underline"
+									to="/medic-signup"
+								>
 									Medic Sign Up
-								</span>
+								</Link>
 							</span>
 						</form>
 					</div>

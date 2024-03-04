@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { registerUrl } from "../utils";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function MedicRegisterPage() {
 	const nameRef = useRef<HTMLInputElement>(null);
@@ -172,9 +173,12 @@ export default function MedicRegisterPage() {
 							</button>
 							<p className="text-sm font-light text-gray-400">
 								Already have an account?{" "}
-								<p className="font-medium text-primary-500 hover:underline">
+								<Link
+									className="font-medium text-primary-500 hover:underline"
+									to="/"
+								>
 									Login here
-								</p>
+								</Link>
 							</p>
 						</form>
 					</div>

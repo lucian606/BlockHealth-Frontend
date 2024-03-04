@@ -1,21 +1,22 @@
 import { useRef } from "react";
 import { registerUrl } from "../utils";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function PatientRegisterPage() {
-    const nameRef = useRef<HTMLInputElement>(null);
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const confirmPasswordRef = useRef<HTMLInputElement>(null);
+	const nameRef = useRef<HTMLInputElement>(null);
+	const emailRef = useRef<HTMLInputElement>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
+	const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-        
+
 		const displayName = nameRef.current?.value;
-        const email = emailRef.current?.value;
-        const password = passwordRef.current?.value;
+		const email = emailRef.current?.value;
+		const password = passwordRef.current?.value;
 		const confirmPassword = confirmPasswordRef.current?.value;
-		
+
 		if (password !== confirmPassword) {
 			return alert("Passwords do not match");
 		}
@@ -26,7 +27,7 @@ export default function PatientRegisterPage() {
 			displayName,
 			email,
 			password,
-			role
+			role,
 		};
 
 		console.log(newPatientData);
@@ -133,9 +134,12 @@ export default function PatientRegisterPage() {
 							</button>
 							<p className="text-sm font-light text-gray-400">
 								Already have an account?{" "}
-								<p className="font-medium text-primary-500 hover:underline">
+								<Link
+									className="font-medium text-primary-500 hover:underline"
+									to="/"
+								>
 									Login here
-								</p>
+								</Link>
 							</p>
 						</form>
 					</div>
