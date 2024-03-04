@@ -2,6 +2,7 @@ import React from "react";
 import PatientRegisterPage from "./pages/PatientRegisterPage";
 import MedicRegisterPage from "./pages/MedicRegisterPage";
 import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 				/>
 				<Route path="/medic-signup" element={<MedicRegisterPage />} />
 				<Route path="/" element={<LoginPage />} />
+				<Route path="/main" element={<MainPage />} />
 			</Routes>
 		</div>
 	);
