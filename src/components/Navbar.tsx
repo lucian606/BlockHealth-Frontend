@@ -6,6 +6,42 @@ interface NavbarProps {
 	currentPage: string;
 }
 
+function navbarPage(page: string, route: string, currentPage: string) {
+	console.log(page, route, currentPage);
+	if (page === currentPage) {
+		// 		"block py-2 px-3 text-white rounded hover:bg-gray-700
+		// hover:text-blue-500
+		// md:hover:bg-transparent
+		// md:border-0 md:p-0 "${
+		// 	props.currentPage === page
+		// 		? "bg-blue-700 text-blue-600"
+		// 		: ""
+		// }`}
+		// aria-current="page"
+		return (
+			<Link
+				to={route}
+				className="block py-2 px-3 rounded hover:bg-gray-700 
+				hover:text-blue-500
+				md:hover:bg-transparent
+				md:border-0 md:p-0 text-blue-700
+				aria-current=page"
+			>
+				{page}
+			</Link>
+		);
+	} else {
+		return (
+			<Link
+				to={route}
+				className="block py-2 px-3 text-white rounded hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent md:border-0 md:p-0 aria-current=page"
+			>
+				{page}
+			</Link>
+		);
+	}
+}
+
 export default function Navbar(props: NavbarProps) {
 	return (
 		<nav className="border-gray-200 bg-gray-900">
@@ -23,8 +59,8 @@ export default function Navbar(props: NavbarProps) {
 					aria-controls="navbar-default"
 					aria-expanded="false"
 				>
-					{/* <span className="sr-only">Open main menu</span>
-					<svg
+					<span className="sr-only">Open main menu</span>
+					{/* <svg
 						className="w-5 h-5"
 						aria-hidden="true"
 						xmlns="http://www.w3.org/2000/svg"
@@ -45,31 +81,15 @@ export default function Navbar(props: NavbarProps) {
 					id="navbar-default"
 				>
 					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-80 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-gray-900">
-						{props.pages.map(
-							(page, index) => (
-								console.log(page),
-								console.log(props.currentPage === page),
-								(
-									<li key={index}>
-										<Link
-											to={props.routes[index]}
-											className={`
-											"block py-2 px-3 text-white rounded hover:bg-gray-700 
-											hover:text-blue-500
-											md:hover:bg-transparent
-											md:border-0 md:p-0 "${
-												props.currentPage === page
-													? "bg-blue-700 text-blue-600"
-													: ""
-											}`}
-											aria-current="page"
-										>
-											{page}
-										</Link>
-									</li>
-								)
-							)
-						)}
+						{props.pages.map((page, index) => (
+							<li key={new Date().getTime()}>
+								{navbarPage(
+									page,
+									props.routes[index],
+									props.currentPage
+								)}
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

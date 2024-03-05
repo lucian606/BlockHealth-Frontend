@@ -15,7 +15,7 @@ function App() {
 				/>
 				<Route path="/medic-signup" element={<MedicRegisterPage />} />
 				<Route path="/" element={<LoginPage />} />
-				<Route path="/main" element={<MainPage />} />
+				<Route path="/home" element={<MainPage />} />
 			</Routes>
 		</div>
 	);
