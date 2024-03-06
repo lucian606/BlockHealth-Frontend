@@ -2,6 +2,9 @@ import { useRef } from "react";
 import { registerUrl } from "../utils";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import ErrorCard from "../components/ErrorCard";
+import { useNavigate } from "react-router-dom";
 
 export default function MedicRegisterPage() {
 	const nameRef = useRef<HTMLInputElement>(null);
@@ -10,6 +13,8 @@ export default function MedicRegisterPage() {
 	const confirmPasswordRef = useRef<HTMLInputElement>(null);
 	const specialtyRef = useRef<HTMLInputElement>(null);
 	const licenseNumberRef = useRef<HTMLInputElement>(null);
+	const [error, setError] = useState<string>("");
+	const navigate = useNavigate();
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -42,10 +47,17 @@ export default function MedicRegisterPage() {
 		axios
 			.post(registerUrl, newMedicData)
 			.then((res) => {
-				console.log(res);
+				if (res.status === 201) {
+					setError("");
+					navigate("/");
+				} else {
+					console.log("Response not 201");
+					console.log(res);
+				}
 			})
 			.catch((err) => {
 				console.log(err);
+				setError(err.response.data.error);
 			});
 	}
 
@@ -56,6 +68,9 @@ export default function MedicRegisterPage() {
 					<img className="w-8 h-8 mr-2" src="/logo.svg" alt="logo" />
 					BlockHealth
 				</p>
+				{error !== "" && (
+					<ErrorCard boldMessage="Error:" infoMessage={error} />
+				)}
 				<div className="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 className="text-xl font-bold leading-tight tracking-tight text-white">

@@ -9,15 +9,6 @@ interface NavbarProps {
 function navbarPage(page: string, route: string, currentPage: string) {
 	console.log(page, route, currentPage);
 	if (page === currentPage) {
-		// 		"block py-2 px-3 text-white rounded hover:bg-gray-700
-		// hover:text-blue-500
-		// md:hover:bg-transparent
-		// md:border-0 md:p-0 "${
-		// 	props.currentPage === page
-		// 		? "bg-blue-700 text-blue-600"
-		// 		: ""
-		// }`}
-		// aria-current="page"
 		return (
 			<Link
 				to={route}
@@ -47,7 +38,7 @@ export default function Navbar(props: NavbarProps) {
 		<nav className="border-gray-200 bg-gray-900">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 				<div className="flex items-center space-x-3 rtl:space-x-reverse">
-					<img className="w-8 h-8 mr-2" src="/logo.svg" alt="logo" />
+					<img className="w-8 h-8" src="/logo.svg" alt="logo" />
 					<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
 						BlockHealth
 					</span>

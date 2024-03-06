@@ -2,10 +2,13 @@ import { useRef } from "react";
 import { loginUrl } from "../utils";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ErrorCard from "../components/ErrorCard";
+import { useState } from "react";
 
 export default function LoginPage() {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
+	const [error, setError] = useState<string>("");
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -21,10 +24,15 @@ export default function LoginPage() {
 		axios
 			.post(loginUrl, credentials)
 			.then((res) => {
-				console.log(res);
+				if (res.status === 200) {
+					setError("");
+					sessionStorage.setItem("token", res.data.token);
+					window.location.href = "/home";
+				}
 			})
 			.catch((err) => {
 				console.log(err);
+				setError(err.response.data.error);
 			});
 	}
 
@@ -35,6 +43,9 @@ export default function LoginPage() {
 					<img className="w-8 h-8 mr-2" src="/logo.svg" alt="logo" />
 					BlockHealth
 				</p>
+				{error !== "" && (
+					<ErrorCard boldMessage="Error:" infoMessage={error} />
+				)}
 				<div className="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 className="text-2xl font-bold leading-tight tracking-tight text-white">
