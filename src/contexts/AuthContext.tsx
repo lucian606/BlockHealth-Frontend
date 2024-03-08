@@ -1,25 +1,26 @@
 import React, { createContext, useContext, useState } from "react";
 
-interface User {
+export interface User {
 	id: string;
 	email: string;
 	name: string;
 	role: "medic" | "patient";
 }
 
-interface Medic extends User {
+export interface Medic extends User {
 	role: "medic";
 	licenseNumber: string;
 	speciality: string;
 }
 
-interface Patient extends User {
+export interface Patient extends User {
 	role: "patient";
 }
 
 interface AuthContextData {
 	user: User | null;
 	isAuthenticatd: () => boolean;
+	isMedic: () => boolean;
 	signIn: (jwtToken: string) => void;
 	signOut(): void;
 }
@@ -57,6 +58,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 		return user !== null ? true : false;
 	};
 
+	const isMedic = () => {
+		console.log("Checking if medic");
+		return user?.role === "medic" ? true : false;
+	};
+
 	const signIn = (jwtToken: string) => {
 		console.log("Signing in");
 		console.log(jwtToken);
@@ -69,7 +75,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, isAuthenticatd, signIn, signOut }}>
+		<AuthContext.Provider
+			value={{ user, isAuthenticatd, isMedic, signIn, signOut }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

@@ -176,6 +176,7 @@ export default function MedicRegisterPage() {
 									type="text"
 									name="license-number"
 									id="license-number"
+									placeholder="1234-5678-9012-3456"
 									className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 									required
 									ref={licenseNumberRef}
