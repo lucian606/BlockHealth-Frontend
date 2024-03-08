@@ -1,38 +1,48 @@
 import { Link } from "react-router-dom";
 
+interface NavbarPageInterface {
+	name: string;
+	route: string;
+	onClickHandler: () => void;
+}
+
 interface NavbarProps {
-	pages: string[];
-	routes: string[];
+	pages: NavbarPageInterface[];
 	currentPage: string;
 }
 
-function navbarPage(page: string, route: string, currentPage: string) {
-	if (page === currentPage) {
+function navbarPage(page: NavbarPageInterface, currentPage: string) {
+	let onClickHandler = page.onClickHandler ? page.onClickHandler : () => {};
+
+	if (page.name === currentPage) {
 		return (
 			<Link
-				to={route}
+				to={page.route}
 				className="block py-2 px-3 rounded hover:bg-gray-700 
 				hover:text-blue-500
 				md:hover:bg-transparent
 				md:border-0 md:p-0 text-blue-700
 				aria-current=page"
+				onClick={onClickHandler}
 			>
-				{page}
+				{page.name}
 			</Link>
 		);
 	} else {
 		return (
 			<Link
-				to={route}
+				to={page.route}
 				className="block py-2 px-3 text-white rounded hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent md:border-0 md:p-0 aria-current=page"
+				onClick={onClickHandler}
 			>
-				{page}
+				{page.name}
 			</Link>
 		);
 	}
 }
 
 export default function Navbar(props: NavbarProps) {
+	console.log(props.pages);
 	return (
 		<nav className="border-gray-200 bg-gray-900">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -73,11 +83,7 @@ export default function Navbar(props: NavbarProps) {
 					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-80 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-gray-900">
 						{props.pages.map((page, index) => (
 							<li key={index}>
-								{navbarPage(
-									page,
-									props.routes[index],
-									props.currentPage
-								)}
+								{navbarPage(page, props.currentPage)}
 							</li>
 						))}
 					</ul>

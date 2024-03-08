@@ -6,13 +6,33 @@ export default function MainPage() {
 	// Cast user to the correct type
 	const newUser = user as User;
 
+	const pages = [
+		{
+			name: "Home",
+			route: "/home",
+		},
+		{
+			name: "Page 1",
+			route: "/medic-signup",
+		},
+		{
+			name: "Page 2",
+			route: "/patient-signup",
+		},
+		{
+			name: "Sign Out",
+			route: "/login",
+			onClickHandler: () => {
+				console.log("Signing out");
+				localStorage.removeItem("token");
+				sessionStorage.removeItem("token");
+			},
+		},
+	];
+
 	return (
 		<div>
-			<Navbar
-				pages={["Home", "Page 1", "Page 2", "Sign Out"]}
-				routes={["/home", "/medic-signup", "patient-signup", "/login"]}
-				currentPage="Home"
-			/>
+			<Navbar pages={pages} currentPage="Home" />
 			<h1>Main Page</h1>
 			<p>
 				{" "}

@@ -30,7 +30,7 @@ export default function LoginPage() {
 				if (res.status === 200) {
 					setError("");
 					signIn(res.data.token);
-					window.location.href = "/home";
+					window.location.href = "/";
 				}
 			})
 			.catch((err) => {
