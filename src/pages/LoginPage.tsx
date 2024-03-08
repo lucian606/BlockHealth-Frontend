@@ -4,11 +4,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import ErrorCard from "../components/ErrorCard";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const [error, setError] = useState<string>("");
+	const { isAuthenticatd, signIn } = useAuth();
+	console.log(isAuthenticatd());
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -26,7 +29,7 @@ export default function LoginPage() {
 			.then((res) => {
 				if (res.status === 200) {
 					setError("");
-					sessionStorage.setItem("token", res.data.token);
+					signIn(res.data.token);
 					window.location.href = "/home";
 				}
 			})

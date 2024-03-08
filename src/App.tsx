@@ -4,6 +4,7 @@ import MedicRegisterPage from "./pages/MedicRegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import { Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
 	return (
@@ -14,8 +15,15 @@ function App() {
 					element={<PatientRegisterPage />}
 				/>
 				<Route path="/medic-signup" element={<MedicRegisterPage />} />
-				<Route path="/" element={<LoginPage />} />
-				<Route path="/home" element={<MainPage />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route
+					path="/"
+					element={
+						<PrivateRoute>
+							<MainPage />
+						</PrivateRoute>
+					}
+				/>
 			</Routes>
 		</div>
 	);

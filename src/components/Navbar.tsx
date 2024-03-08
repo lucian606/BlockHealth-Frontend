@@ -7,7 +7,6 @@ interface NavbarProps {
 }
 
 function navbarPage(page: string, route: string, currentPage: string) {
-	console.log(page, route, currentPage);
 	if (page === currentPage) {
 		return (
 			<Link
@@ -73,7 +72,7 @@ export default function Navbar(props: NavbarProps) {
 				>
 					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-80 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-gray-900">
 						{props.pages.map((page, index) => (
-							<li key={new Date().getTime()}>
+							<li key={index}>
 								{navbarPage(
 									page,
 									props.routes[index],

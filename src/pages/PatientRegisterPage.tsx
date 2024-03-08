@@ -43,7 +43,7 @@ export default function PatientRegisterPage() {
 			.then((res) => {
 				if (res.status === 201) {
 					setError("");
-					navigate("/");
+					navigate("/login");
 				} else {
 					console.log("Response not 201");
 					console.log(res);
@@ -152,7 +152,7 @@ export default function PatientRegisterPage() {
 								Already have an account?{" "}
 								<Link
 									className="font-medium text-primary-500 hover:underline"
-									to="/"
+									to="/login"
 								>
 									Login here
 								</Link>
