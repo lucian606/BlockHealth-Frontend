@@ -1,6 +1,6 @@
 import React from "react";
-import PatientRegisterPage from "./pages/PatientRegisterPage";
-import MedicRegisterPage from "./pages/MedicRegisterPage";
+import PatientRegisterPage from "./pages/patientPages/PatientRegisterPage";
+import MedicRegisterPage from "./pages/medicPages/MedicRegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import { Routes, Route } from "react-router-dom";

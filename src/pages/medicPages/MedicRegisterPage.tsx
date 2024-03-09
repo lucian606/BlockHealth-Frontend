@@ -1,16 +1,18 @@
 import { useRef } from "react";
-import { registerUrl } from "../utils";
+import { registerUrl } from "../../utils";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import ErrorCard from "../components/ErrorCard";
+import ErrorCard from "../../components/ErrorCard";
 import { useNavigate } from "react-router-dom";
 
-export default function PatientRegisterPage() {
+export default function MedicRegisterPage() {
 	const nameRef = useRef<HTMLInputElement>(null);
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const confirmPasswordRef = useRef<HTMLInputElement>(null);
+	const specialtyRef = useRef<HTMLInputElement>(null);
+	const licenseNumberRef = useRef<HTMLInputElement>(null);
 	const [error, setError] = useState<string>("");
 	const navigate = useNavigate();
 
@@ -21,25 +23,29 @@ export default function PatientRegisterPage() {
 		const email = emailRef.current?.value;
 		const password = passwordRef.current?.value;
 		const confirmPassword = confirmPasswordRef.current?.value;
+		const specialty = specialtyRef.current?.value;
+		const licenseNumber = licenseNumberRef.current?.value;
 
 		if (password !== confirmPassword) {
 			return alert("Passwords do not match");
 		}
 
-		const role = "patient";
+		const role = "medic";
 
-		const newPatientData = {
+		const newMedicData = {
 			displayName,
 			email,
 			password,
 			role,
+			specialty,
+			licenseNumber,
 		};
 
-		console.log(newPatientData);
+		console.log(newMedicData);
 		console.log(registerUrl);
 
 		axios
-			.post(registerUrl, newPatientData)
+			.post(registerUrl, newMedicData)
 			.then((res) => {
 				if (res.status === 201) {
 					setError("");
@@ -68,7 +74,7 @@ export default function PatientRegisterPage() {
 				<div className="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 className="text-xl font-bold leading-tight tracking-tight text-white">
-							Create a patient account
+							Create a medic account
 						</h1>
 						<form
 							className="space-y-4 md:space-y-6"
@@ -86,7 +92,7 @@ export default function PatientRegisterPage() {
 									name="name"
 									id="name"
 									className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-									placeholder="Patient Name"
+									placeholder="Medic Name"
 									required
 									ref={nameRef}
 								/>
@@ -103,7 +109,7 @@ export default function PatientRegisterPage() {
 									name="email"
 									id="email"
 									className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-									placeholder="patient@email.com"
+									placeholder="medic@email.com"
 									required
 									ref={emailRef}
 								/>
@@ -142,11 +148,45 @@ export default function PatientRegisterPage() {
 									ref={confirmPasswordRef}
 								/>
 							</div>
+							<div>
+								<label
+									htmlFor="specialty"
+									className="block mb-2 text-sm font-medium text-white"
+								>
+									Specialty
+								</label>
+								<input
+									type="text"
+									name="specialty"
+									id="specialty"
+									className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+									placeholder="Gastroenterology"
+									required
+									ref={specialtyRef}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="license-number"
+									className="block mb-2 text-sm font-medium text-white"
+								>
+									License number
+								</label>
+								<input
+									type="text"
+									name="license-number"
+									id="license-number"
+									placeholder="1234-5678-9012-3456"
+									className="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+									required
+									ref={licenseNumberRef}
+								/>
+							</div>
 							<button
 								type="submit"
 								className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
 							>
-								Create patient account
+								Create medic account
 							</button>
 							<p className="text-sm font-light text-gray-400">
 								Already have an account?{" "}
