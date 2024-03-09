@@ -4,7 +4,9 @@ import PatientMainPage from "./patientPages/PatientMainPage";
 import MedicMainPage from "./medicPages/MedicMainPage";
 
 export default function MainPage() {
-	const { isMedic } = useAuth();
+	const { isMedic, user } = useAuth();
+
+	console.log("Signed in as: ", user);
 
 	if (isMedic()) {
 		return <MedicMainPage />;

@@ -4,13 +4,14 @@ export interface User {
 	id: string;
 	email: string;
 	name: string;
+	jwt: string | null;
 	role: "medic" | "patient";
 }
 
 export interface Medic extends User {
 	role: "medic";
 	licenseNumber: string;
-	speciality: string;
+	specialty: string;
 }
 
 export interface Patient extends User {
@@ -35,20 +36,49 @@ interface AuthProviderProps {
 	children: React.ReactNode;
 }
 
+function parseUserJWT(jwt: string) {
+	const userJson = JSON.parse(atob(jwt.split(".")[1]));
+	const role = userJson.role;
+	if (role === "patient") {
+		console.log("User is a patient");
+		const user: Patient = {
+			id: userJson.user_id,
+			email: userJson.email,
+			name: userJson.name,
+			jwt: jwt,
+			role: userJson.role,
+		};
+		user.jwt = jwt;
+		return user;
+	} else if (role === "medic") {
+		console.log("User is a medic");
+		const user: Medic = {
+			id: userJson.user_id,
+			email: userJson.email,
+			name: userJson.name,
+			jwt: jwt,
+			role: userJson.role,
+			licenseNumber: userJson.licenseNumber,
+			specialty: userJson.specialty,
+		};
+		user.jwt = jwt;
+		return user;
+	}
+	return null;
+}
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState<User | null>(() => {
 		console.log("Initializing user");
 		let jwt = localStorage.getItem("token");
 		if (jwt) {
 			console.log("Found token in local storage");
-			const user: User = JSON.parse(atob(jwt.split(".")[1]));
-			return user;
+			return parseUserJWT(jwt);
 		}
 		jwt = sessionStorage.getItem("token");
 		if (jwt) {
 			console.log("Found token in session storage");
-			const user: User = JSON.parse(atob(jwt.split(".")[1]));
-			return user;
+			return parseUserJWT(jwt);
 		}
 		return null;
 	});
