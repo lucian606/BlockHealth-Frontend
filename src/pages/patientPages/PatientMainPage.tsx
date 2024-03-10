@@ -1,9 +1,11 @@
 import Card from "../../components/Card";
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function PatientMainPage() {
 	const { user } = useAuth();
+	const navigate = useNavigate();
 
 	const pages = [
 		{
@@ -54,16 +56,28 @@ export default function PatientMainPage() {
 					title="Diagnoses"
 					description="Here you can view your medical record by being able to see your diagnoses and details about them"
 					img="./medical-record.svg"
+					clickable={true}
+					onClick={() => {
+						navigate("/diagnoses");
+					}}
 				/>
 				<Card
 					title="Whitelist"
 					description="On this page you can see which medics have access to your medical record. You can also add or remove medics"
 					img="./locked-file.svg"
+					clickable={true}
+					onClick={() => {
+						navigate("/whitelist");
+					}}
 				/>
 				<Card
 					title="Requests"
 					description="Here you can see the requests that medics have made to access your medical record. You can accept or deny them"
 					img="./request.svg"
+					clickable={true}
+					onClick={() => {
+						navigate("/requests");
+					}}
 				/>
 			</div>
 		</div>

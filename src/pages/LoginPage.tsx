@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import ErrorCard from "../components/ErrorCard";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const [error, setError] = useState<string>("");
 	const { signIn } = useAuth();
+	const navigate = useNavigate();
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -29,7 +31,7 @@ export default function LoginPage() {
 				if (res.status === 200) {
 					setError("");
 					signIn(res.data.token);
-					window.location.href = "/";
+					navigate("/");
 				}
 			})
 			.catch((err) => {
