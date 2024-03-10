@@ -26,7 +26,6 @@ export default function PatientMainPage() {
 			name: "Sign Out",
 			route: "/login",
 			onClickHandler: () => {
-				console.log("Signing out");
 				localStorage.removeItem("token");
 				sessionStorage.removeItem("token");
 			},

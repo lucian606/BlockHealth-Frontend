@@ -35,9 +35,6 @@ export default function PatientRegisterPage() {
 			role,
 		};
 
-		console.log(newPatientData);
-		console.log(registerUrl);
-
 		axios
 			.post(registerUrl, newPatientData)
 			.then((res) => {

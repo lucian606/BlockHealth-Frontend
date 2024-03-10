@@ -40,7 +40,6 @@ function parseUserJWT(jwt: string) {
 	const userJson = JSON.parse(atob(jwt.split(".")[1]));
 	const role = userJson.role;
 	if (role === "patient") {
-		console.log("User is a patient");
 		const user: Patient = {
 			id: userJson.user_id,
 			email: userJson.email,
@@ -51,7 +50,6 @@ function parseUserJWT(jwt: string) {
 		user.jwt = jwt;
 		return user;
 	} else if (role === "medic") {
-		console.log("User is a medic");
 		const user: Medic = {
 			id: userJson.user_id,
 			email: userJson.email,
@@ -69,7 +67,6 @@ function parseUserJWT(jwt: string) {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState<User | null>(() => {
-		console.log("Initializing user");
 		let jwt = localStorage.getItem("token");
 		if (jwt) {
 			console.log("Found token in local storage");
@@ -84,20 +81,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	});
 
 	const isAuthenticatd = () => {
-		console.log("Checking if authenticated");
 		return user !== null ? true : false;
 	};
 
 	const isMedic = () => {
-		console.log("Checking if medic");
 		return user?.role === "medic" ? true : false;
 	};
 
 	const signIn = (jwtToken: string) => {
-		console.log("Signing in");
-		console.log(jwtToken);
 		sessionStorage.setItem("token", jwtToken);
-		console.log(user);
 	};
 
 	const signOut = () => {

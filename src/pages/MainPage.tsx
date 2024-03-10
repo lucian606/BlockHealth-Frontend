@@ -6,8 +6,6 @@ import MedicMainPage from "./medicPages/MedicMainPage";
 export default function MainPage() {
 	const { isMedic, user } = useAuth();
 
-	console.log("Signed in as: ", user);
-
 	if (isMedic()) {
 		return <MedicMainPage />;
 	} else {

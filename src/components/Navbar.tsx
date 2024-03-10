@@ -42,7 +42,6 @@ function navbarPage(page: NavbarPageInterface, currentPage: string) {
 }
 
 export default function Navbar(props: NavbarProps) {
-	console.log(props.pages);
 	return (
 		<nav className="border-gray-200 bg-gray-900">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

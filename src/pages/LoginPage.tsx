@@ -10,8 +10,7 @@ export default function LoginPage() {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const [error, setError] = useState<string>("");
-	const { isAuthenticatd, signIn } = useAuth();
-	console.log(isAuthenticatd());
+	const { signIn } = useAuth();
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

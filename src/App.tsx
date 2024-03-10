@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import PatientDiagnosesPage from "./pages/patientPages/PatientDiagnosesPage";
 
 function App() {
 	return (
@@ -21,6 +22,14 @@ function App() {
 					element={
 						<PrivateRoute>
 							<MainPage />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path="/diagnoses"
+					element={
+						<PrivateRoute>
+							<PatientDiagnosesPage />
 						</PrivateRoute>
 					}
 				/>

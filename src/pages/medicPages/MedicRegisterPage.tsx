@@ -41,9 +41,6 @@ export default function MedicRegisterPage() {
 			licenseNumber,
 		};
 
-		console.log(newMedicData);
-		console.log(registerUrl);
-
 		axios
 			.post(registerUrl, newMedicData)
 			.then((res) => {
