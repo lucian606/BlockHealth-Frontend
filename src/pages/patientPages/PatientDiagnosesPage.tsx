@@ -51,8 +51,7 @@ export default function PatientDiagnosesPage() {
 				},
 			})
 			.then((response) => {
-				console.log(response.data);
-				setDiagnoses(response.data);
+				setDiagnoses(response.data.diagnoses);
 			});
 	}, []);
 
@@ -60,16 +59,17 @@ export default function PatientDiagnosesPage() {
 		<div className="flex flex-col min-h-screen bg-gray-800">
 			<Navbar pages={pages} currentPage="Diagnoses" />
 			<div className="p-5 flex flex-col flex-grow  overflow-auto text-white">
-				{diagnoses.map((diagnosis, index) => (
-					<DiagnosisCard
-						key={index}
-						diagnosisDetails={diagnosis.diagnosisDetails}
-						specialty={diagnosis.specialty}
-						location={diagnosis.location}
-						timestamp={diagnosis.timestamp.replace(",", " at")}
-						medicId={diagnosis.medicId}
-					/>
-				))}
+				{diagnoses.length !== 0 &&
+					diagnoses.map((diagnosis, index) => (
+						<DiagnosisCard
+							key={index}
+							diagnosisDetails={diagnosis.diagnosisDetails}
+							specialty={diagnosis.specialty}
+							location={diagnosis.location}
+							timestamp={diagnosis.timestamp.replace(",", " at")}
+							medicId={diagnosis.medicId}
+						/>
+					))}
 			</div>
 		</div>
 	);

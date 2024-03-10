@@ -31,7 +31,7 @@ export default function LoginPage() {
 				if (res.status === 200) {
 					setError("");
 					signIn(res.data.token);
-					navigate("/");
+					navigate("../");
 				}
 			})
 			.catch((err) => {
