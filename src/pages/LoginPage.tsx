@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { loginUrl } from "../utils";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import ErrorCard from "../components/ErrorCard";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
@@ -29,9 +29,11 @@ export default function LoginPage() {
 			.post(loginUrl, credentials)
 			.then((res) => {
 				if (res.status === 200) {
+					console.log("Logged in");
 					setError("");
 					signIn(res.data.token);
-					navigate("../");
+					console.log(res.data.token);
+					window.location.href = "/";
 				}
 			})
 			.catch((err) => {

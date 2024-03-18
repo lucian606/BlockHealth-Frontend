@@ -6,6 +6,7 @@ import MainPage from "./pages/MainPage";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import PatientDiagnosesPage from "./pages/patientPages/PatientDiagnosesPage";
+import PatientWhitelistPage from "./pages/patientPages/PatientWhitelistPage";
 
 function App() {
 	return (
@@ -30,6 +31,14 @@ function App() {
 					element={
 						<PrivateRoute>
 							<PatientDiagnosesPage />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path="/whitelist"
+					element={
+						<PrivateRoute>
+							<PatientWhitelistPage />
 						</PrivateRoute>
 					}
 				/>
