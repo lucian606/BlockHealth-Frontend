@@ -6,7 +6,7 @@ interface WhitelistCardProps {
 
 export default function WhitelistCard(props: WhitelistCardProps) {
 	return (
-		<div className="bg-gray-700 p-5 rounded-lg my-5 flex justify-between items-center">
+		<div className="bg-gray-700 p-5 rounded-lg my-2 flex justify-between items-center">
 			<div className="flex flex-col">
 				<div> Placeholder: {props.doctorName} </div>
 				<div> Specialty: ORL </div>
