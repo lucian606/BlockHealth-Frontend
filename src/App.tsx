@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import PatientDiagnosesPage from "./pages/patientPages/PatientDiagnosesPage";
 import PatientWhitelistPage from "./pages/patientPages/PatientWhitelistPage";
+import PatientRequestsPage from "./pages/patientPages/PatientRequestsPage";
 
 function App() {
 	return (
@@ -39,6 +40,14 @@ function App() {
 					element={
 						<PrivateRoute>
 							<PatientWhitelistPage />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path="/requests"
+					element={
+						<PrivateRoute>
+							<PatientRequestsPage />
 						</PrivateRoute>
 					}
 				/>

@@ -5,3 +5,12 @@ export interface Diagnosis {
     specialty: string;
     timestamp: string;
 }
+
+export interface WhitelistItem {
+    displayName: string;
+    email: string;
+    specialty: string;
+    uid: string;
+}
+
+export type RequestItem = WhitelistItem;

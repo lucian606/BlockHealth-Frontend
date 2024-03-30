@@ -1,42 +1,15 @@
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { whitelistUrl } from "../../utils";
+import { whitelistUrl, patientNavbarPages } from "../../utils";
 import axios from "axios";
 import WhitelistCard from "../../components/WhitelistCard";
+import { WhitelistItem } from "../../types";
 
 export default function PatientWhitelistPage() {
 	const { user } = useAuth();
 
-	const pages = [
-		{
-			name: "Welcome",
-			route: "/",
-		},
-		{
-			name: "Diagnoses",
-			route: "/diagnoses",
-		},
-		{
-			name: "Whitelist",
-			route: "/whitelist",
-		},
-		{
-			name: "Requests",
-			route: "/requests",
-		},
-		{
-			name: "Sign Out",
-			route: "/login",
-			onClickHandler: () => {
-				console.log("Signing out");
-				localStorage.removeItem("token");
-				sessionStorage.removeItem("token");
-			},
-		},
-	];
-
-	const [whitelist, setWhitelist] = useState([]);
+	const [whitelist, setWhitelist] = useState<WhitelistItem[]>([]);
 
 	const userWhitelistUrl = `${whitelistUrl}`;
 
@@ -54,7 +27,9 @@ export default function PatientWhitelistPage() {
 			.then((response) => {
 				console.log(response);
 				if (response.status === 200) {
-					setWhitelist(whitelist.filter((item) => item !== medicId));
+					setWhitelist(
+						whitelist.filter((medic) => medic.uid !== medicId)
+					);
 				}
 			});
 	}
@@ -75,24 +50,28 @@ export default function PatientWhitelistPage() {
 
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">
-			<Navbar pages={pages} currentPage="Whitelist" />
+			<Navbar pages={patientNavbarPages} currentPage="Whitelist" />
 			<div className="p-5 flex flex-col flex-grow  overflow-auto text-white">
 				{whitelist.length > 0 ? (
 					whitelist.map((whitelistItem, index) => {
 						return (
 							<WhitelistCard
 								key={index}
-								doctorName={whitelistItem}
-								specialty={"ORL"}
+								displayName={whitelistItem.displayName}
+								specialty={whitelistItem.specialty}
+								email={whitelistItem.email}
+								uid={whitelistItem.uid}
 								onClickHandler={() => {
 									console.log("Delete whitelist item");
-									removeMedicFromWhitelist(whitelistItem);
+									removeMedicFromWhitelist(whitelistItem.uid);
 								}}
 							/>
 						);
 					})
 				) : (
-					<p>No whitelist items found</p>
+					<div className="flex items-center justify-center">
+						<p>No medics found in your whitelist.</p>
+					</div>
 				)}
 			</div>
 		</div>

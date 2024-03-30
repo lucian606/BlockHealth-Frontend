@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
-import { diagnosesUrl } from "../../utils";
+import { diagnosesUrl, patientNavbarPages } from "../../utils";
 import axios from "axios";
 import { Diagnosis } from "../../types";
 import { useState } from "react";
@@ -9,34 +9,6 @@ import DiagnosisCard from "../../components/DiagnosisCard";
 
 export default function PatientDiagnosesPage() {
 	const { user } = useAuth();
-
-	const pages = [
-		{
-			name: "Welcome",
-			route: "/",
-		},
-		{
-			name: "Diagnoses",
-			route: "/diagnoses",
-		},
-		{
-			name: "Whitelist",
-			route: "/whitelist",
-		},
-		{
-			name: "Requests",
-			route: "/requests",
-		},
-		{
-			name: "Sign Out",
-			route: "/login",
-			onClickHandler: () => {
-				console.log("Signing out");
-				localStorage.removeItem("token");
-				sessionStorage.removeItem("token");
-			},
-		},
-	];
 
 	const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 
@@ -57,7 +29,7 @@ export default function PatientDiagnosesPage() {
 
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">
-			<Navbar pages={pages} currentPage="Diagnoses" />
+			<Navbar pages={patientNavbarPages} currentPage="Diagnoses" />
 			<div className="p-5 flex flex-col flex-grow  overflow-auto text-white">
 				{diagnoses.length !== 0 &&
 					diagnoses.map((diagnosis, index) => (
