@@ -1,10 +1,8 @@
-import { useRef } from "react";
-import { registerUrl } from "../../utils";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { registerUrl } from "../../utils";
 import ErrorCard from "../../components/ErrorCard";
-import { useNavigate } from "react-router-dom";
 
 export default function MedicRegisterPage() {
 	const nameRef = useRef<HTMLInputElement>(null);

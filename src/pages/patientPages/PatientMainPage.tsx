@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { patientNavbarPages } from "../../utils";
-import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function PatientMainPage() {
 	const { user } = useAuth();

@@ -1,11 +1,11 @@
-import Navbar from "../../components/Navbar";
-import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { requestsUrl, whitelistUrl, patientNavbarPages } from "../../utils";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
+import { requestsUrl, whitelistUrl, patientNavbarPages } from "../../utils";
+import { RequestItem } from "../../types";
+import Navbar from "../../components/Navbar";
 import RequestCard from "../../components/RequestCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { RequestItem } from "../../types";
 
 export default function PatientWhitelistPage() {
 	const { user } = useAuth();

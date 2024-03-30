@@ -1,11 +1,9 @@
-import { useRef } from "react";
-import { loginUrl } from "../utils";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
-import ErrorCard from "../components/ErrorCard";
-import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { loginUrl } from "../utils";
+import ErrorCard from "../components/ErrorCard";
 
 export default function LoginPage() {
 	const emailRef = useRef<HTMLInputElement>(null);

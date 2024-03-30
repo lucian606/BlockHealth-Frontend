@@ -1,8 +1,8 @@
-import Navbar from "../../components/Navbar";
-import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { whitelistUrl, patientNavbarPages } from "../../utils";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
+import { whitelistUrl, patientNavbarPages } from "../../utils";
+import Navbar from "../../components/Navbar";
 import WhitelistCard from "../../components/WhitelistCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { WhitelistItem } from "../../types";

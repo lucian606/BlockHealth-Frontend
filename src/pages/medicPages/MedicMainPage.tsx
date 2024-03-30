@@ -1,7 +1,7 @@
-import Card from "../../components/Card";
-import Navbar from "../../components/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Card from "../../components/Card";
+import Navbar from "../../components/Navbar";
 
 export default function PatientMainPage() {
 	const { user } = useAuth();

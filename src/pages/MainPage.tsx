@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import { useAuth } from "../contexts/AuthContext";
 import PatientMainPage from "./patientPages/PatientMainPage";
 import MedicMainPage from "./medicPages/MedicMainPage";

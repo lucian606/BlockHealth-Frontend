@@ -1,10 +1,9 @@
-import React from "react";
+import { Routes, Route } from "react-router-dom";
 import PatientRegisterPage from "./pages/patientPages/PatientRegisterPage";
 import MedicRegisterPage from "./pages/medicPages/MedicRegisterPage";
+import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
-import { Routes, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
 import PatientDiagnosesPage from "./pages/patientPages/PatientDiagnosesPage";
 import PatientWhitelistPage from "./pages/patientPages/PatientWhitelistPage";
 import PatientRequestsPage from "./pages/patientPages/PatientRequestsPage";
