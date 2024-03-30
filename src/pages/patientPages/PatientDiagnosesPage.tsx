@@ -6,11 +6,13 @@ import axios from "axios";
 import { Diagnosis } from "../../types";
 import { useState } from "react";
 import DiagnosisCard from "../../components/DiagnosisCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function PatientDiagnosesPage() {
 	const { user } = useAuth();
 
 	const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
+	const [loading, setLoading] = useState(true);
 
 	const userDiagnosesUrl = `${diagnosesUrl}/${user?.id}`;
 
@@ -24,8 +26,20 @@ export default function PatientDiagnosesPage() {
 			})
 			.then((response) => {
 				setDiagnoses(response.data.diagnoses);
+				setLoading(false);
 			});
 	}, []);
+
+	if (loading) {
+		return (
+			<div className="flex flex-col min-h-screen bg-gray-800">
+				<Navbar pages={patientNavbarPages} currentPage="Diagnoses" />
+				<div className="flex flex-col flex-grow items-center justify-center">
+					<LoadingSpinner />
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">

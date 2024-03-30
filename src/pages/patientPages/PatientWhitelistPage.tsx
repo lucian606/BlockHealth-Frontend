@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { whitelistUrl, patientNavbarPages } from "../../utils";
 import axios from "axios";
 import WhitelistCard from "../../components/WhitelistCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { WhitelistItem } from "../../types";
 
 export default function PatientWhitelistPage() {
 	const { user } = useAuth();
 
+	const [loading, setLoading] = useState(true);
 	const [whitelist, setWhitelist] = useState<WhitelistItem[]>([]);
 
 	const userWhitelistUrl = `${whitelistUrl}`;
@@ -31,6 +33,7 @@ export default function PatientWhitelistPage() {
 						whitelist.filter((medic) => medic.uid !== medicId)
 					);
 				}
+				setLoading(false);
 			});
 	}
 
@@ -44,9 +47,20 @@ export default function PatientWhitelistPage() {
 			})
 			.then((response) => {
 				setWhitelist(response.data.whitelist);
-				console.log(response.data.whitelist);
+				setLoading(false);
 			});
 	}, []);
+
+	if (loading) {
+		return (
+			<div className="flex flex-col min-h-screen bg-gray-800">
+				<Navbar pages={patientNavbarPages} currentPage="Whitelist" />
+				<div className="flex flex-col flex-grow items-center justify-center">
+					<LoadingSpinner />
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">

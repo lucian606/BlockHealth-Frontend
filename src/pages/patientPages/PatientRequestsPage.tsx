@@ -4,15 +4,16 @@ import { useEffect, useState } from "react";
 import { requestsUrl, whitelistUrl, patientNavbarPages } from "../../utils";
 import axios from "axios";
 import RequestCard from "../../components/RequestCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { RequestItem } from "../../types";
 
 export default function PatientWhitelistPage() {
 	const { user } = useAuth();
 
+	const [loading, setLoading] = useState(true);
 	const [requests, setRequests] = useState<RequestItem[]>([]);
 
 	const userRequestsUrl = requestsUrl + `/${user?.id}`;
-	const userWhitelistUrl = whitelistUrl + `/${user?.id}`;
 
 	function deleteRequestByMedic(uid: string) {
 		axios
@@ -65,9 +66,20 @@ export default function PatientWhitelistPage() {
 			})
 			.then((response) => {
 				setRequests(response.data.requests);
-				console.log(response.data.requests);
+				setLoading(false);
 			});
 	}, []);
+
+	if (loading) {
+		return (
+			<div className="flex flex-col min-h-screen bg-gray-800">
+				<Navbar pages={patientNavbarPages} currentPage="Requests" />
+				<div className="flex flex-col flex-grow items-center justify-center">
+					<LoadingSpinner />
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">
