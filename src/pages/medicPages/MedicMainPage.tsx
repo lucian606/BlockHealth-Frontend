@@ -2,41 +2,15 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card";
 import Navbar from "../../components/Navbar";
+import { medicNavbarPages } from "../../utils";
 
 export default function PatientMainPage() {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
-	const pages = [
-		{
-			name: "Welcome",
-			route: "/",
-		},
-		{
-			name: "Diagnoses",
-			route: "/diagnoses",
-		},
-		{
-			name: "Whitelist",
-			route: "/whitelist",
-		},
-		{
-			name: "Requests",
-			route: "/requests",
-		},
-		{
-			name: "Sign Out",
-			route: "/login",
-			onClickHandler: () => {
-				localStorage.removeItem("token");
-				sessionStorage.removeItem("token");
-			},
-		},
-	];
-
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">
-			<Navbar pages={pages} currentPage="Welcome" />
+			<Navbar pages={medicNavbarPages} currentPage="Welcome" />
 			<div className="p-5 flex flex-col flex-grow  overflow-auto text-white items-center justify-center">
 				<img className="w-40 h-40" src="./care.svg" alt="logo" />
 				<p className="text-2xl md:text-4xl font-bold">

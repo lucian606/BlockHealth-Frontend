@@ -7,29 +7,53 @@ export const whitelistUrl: string = `${backendUrl}/api/whitelists`;
 export const requestsUrl: string = `${backendUrl}/api/requests`;
 
 export const patientNavbarPages = [
-		{
-			name: "Welcome",
-			route: "/",
+	{
+		name: "Welcome",
+		route: "/",
+	},
+	{
+		name: "Diagnoses",
+		route: "/diagnoses",
+	},
+	{
+		name: "Whitelist",
+		route: "/whitelist",
+	},
+	{
+		name: "Requests",
+		route: "/requests",
+	},
+	{
+		name: "Sign Out",
+		route: "/login",
+		onClickHandler: () => {
+			console.log("Signing out");
+			localStorage.removeItem("token");
+			sessionStorage.removeItem("token");
 		},
-		{
-			name: "Diagnoses",
-			route: "/diagnoses",
+	},
+];
+
+export const medicNavbarPages = [
+	{
+		name: "Welcome",
+		route: "/",
+	},
+	{
+		name: "Patients",
+		route: "/patients",
+	},
+	{
+		name: "Requests",
+		route: "/requests",
+	},
+	{
+		name: "Sign Out",
+		route: "/login",
+		onClickHandler: () => {
+			console.log("Signing out");
+			localStorage.removeItem("token");
+			sessionStorage.removeItem("token");
 		},
-		{
-			name: "Whitelist",
-			route: "/whitelist",
-		},
-		{
-			name: "Requests",
-			route: "/requests",
-		},
-		{
-			name: "Sign Out",
-			route: "/login",
-			onClickHandler: () => {
-				console.log("Signing out");
-				localStorage.removeItem("token");
-				sessionStorage.removeItem("token");
-			},
-		},
-	];
+	},
+];

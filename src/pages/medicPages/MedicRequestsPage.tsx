@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRef } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { requestsUrl, patientNavbarPages } from "../../utils";
+import { requestsUrl, patientNavbarPages, medicNavbarPages } from "../../utils";
 import { Patient } from "../../types";
 import Navbar from "../../components/Navbar";
 import PatientCard from "../../components/PatientCard";
@@ -67,7 +67,7 @@ export default function MedicRequestsPage() {
 	if (loading) {
 		return (
 			<div className="flex flex-col min-h-screen bg-gray-800">
-				<Navbar pages={patientNavbarPages} currentPage="Requests" />
+				<Navbar pages={medicNavbarPages} currentPage="Requests" />
 				<div className="flex flex-col flex-grow items-center justify-center">
 					<LoadingSpinner />
 				</div>
@@ -77,7 +77,7 @@ export default function MedicRequestsPage() {
 
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">
-			<Navbar pages={patientNavbarPages} currentPage="Requests" />
+			<Navbar pages={medicNavbarPages} currentPage="Requests" />
 			<div className="p-5 pb-2 flex items-center justify-center text-white">
 				<p className="text-lg font-bold overflow-auto">
 					To request access to a patient's record, please enter their

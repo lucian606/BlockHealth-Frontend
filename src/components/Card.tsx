@@ -19,7 +19,7 @@ export default function Card(props: CardProps) {
 		<div className={divClassName} onClick={props.onClick}>
 			<img className="w-20 h-20" src={props.img} alt="logo" />
 			<p className="mt-2 text-xl font-bold text-center">{props.title}</p>
-			<div className="h-full flex flex-col items-center justify-center">
+			<div className="h-full flex flex-col overflow-auto items-center justify-center">
 				<p className="md:text-md text-center">{props.description}</p>
 			</div>
 		</div>
