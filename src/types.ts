@@ -14,3 +14,9 @@ export interface WhitelistItem {
 }
 
 export type RequestItem = WhitelistItem;
+
+export interface Patient {
+    email: string;
+    uid: string;
+    name: string;
+}

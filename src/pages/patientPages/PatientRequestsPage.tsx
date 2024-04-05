@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar";
 import RequestCard from "../../components/RequestCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
-export default function PatientWhitelistPage() {
+export default function PatientRequestsPage() {
 	const { user } = useAuth();
 
 	const [loading, setLoading] = useState(true);
