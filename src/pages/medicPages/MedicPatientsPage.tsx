@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { whitelistUrl, medicNavbarPages } from "../../utils";
 import Navbar from "../../components/Navbar";
@@ -9,6 +10,7 @@ import PatientCard from "../../components/PatientCard";
 
 export default function MedicPatientsPage() {
 	const { user } = useAuth();
+	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState(true);
 	const [patients, setPatients] = useState<Patient[]>([]);
@@ -52,8 +54,11 @@ export default function MedicPatientsPage() {
 								key={patient.uid}
 								displayName={patient.name}
 								email={patient.email}
-								uid={patient.id}
+								uid={patient.uid}
 								clickable={true}
+								onClick={() => {
+									navigate(`/patients/${patient.uid}`);
+								}}
 							/>
 						);
 					})
