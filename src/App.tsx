@@ -9,6 +9,7 @@ import PatientWhitelistPage from "./pages/patientPages/PatientWhitelistPage";
 import RequestPage from "./pages/RequestPage";
 import MedicPatientsPage from "./pages/medicPages/MedicPatientsPage";
 import MedicDiagnosesPage from "./pages/medicPages/MedicDiagnosesPage";
+import CreateDiagnoisPage from "./pages/medicPages/CreateDiagnosisPage";
 
 function App() {
 	return (
@@ -65,6 +66,14 @@ function App() {
 					element={
 						<PrivateRoute>
 							<MedicDiagnosesPage />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path="/create-diagnosis/:id"
+					element={
+						<PrivateRoute>
+							<CreateDiagnoisPage />
 						</PrivateRoute>
 					}
 				/>

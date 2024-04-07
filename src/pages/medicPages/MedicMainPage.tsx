@@ -26,26 +26,17 @@ export default function PatientMainPage() {
 			</div>
 			<div className="flex flex-col md:flex-row justify-center p-5 gap-5">
 				<Card
-					title="Diagnoses"
-					description="Here you can view your medical record by being able to see your diagnoses and details about them"
+					title="Patients"
+					description="Here you can see the patients to whom you have access to their medical record. You can see their medical history and create new diagnoses."
 					img="./medical-record.svg"
 					clickable={true}
 					onClick={() => {
-						navigate("/diagnoses");
-					}}
-				/>
-				<Card
-					title="Whitelist"
-					description="On this page you can see which medics have access to your medical record. You can also add or remove medics"
-					img="./locked-file.svg"
-					clickable={true}
-					onClick={() => {
-						navigate("/whitelist");
+						navigate("/patients");
 					}}
 				/>
 				<Card
 					title="Requests"
-					description="Here you can see the requests that medics have made to access your medical record. You can accept or deny them"
+					description="You can make a request to access a patient's medical record by providing the patient's email. You can also see the requests you have made."
 					img="./request.svg"
 					clickable={true}
 					onClick={() => {
