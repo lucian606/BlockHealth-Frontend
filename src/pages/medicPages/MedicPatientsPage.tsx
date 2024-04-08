@@ -46,9 +46,9 @@ export default function MedicPatientsPage() {
 	return (
 		<div className="flex flex-col min-h-screen bg-gray-800">
 			<Navbar pages={medicNavbarPages} currentPage="Patients" />
-			<div className="p-5 flex flex-wrap gap-4 justify-center sm:justify-start items-start text-white">
-				{patients.length > 0 ? (
-					patients.map((patient) => {
+			{patients.length > 0 ? (
+				<div className="p-5 flex flex-wrap gap-4 justify-center sm:justify-start items-start text-white">
+					{patients.map((patient) => {
 						return (
 							<PatientCard
 								key={patient.uid}
@@ -61,16 +61,16 @@ export default function MedicPatientsPage() {
 								}}
 							/>
 						);
-					})
-				) : (
-					<div className="flex items-center justify-center">
-						<p>
-							For the moment you don't have access to any
-							patient's record.
-						</p>
-					</div>
-				)}
-			</div>
+					})}
+				</div>
+			) : (
+				<div className="flex items-center justify-center p-5 text-white">
+					<p>
+						For the moment you don't have access to any patient's
+						record.
+					</p>
+				</div>
+			)}
 		</div>
 	);
 }

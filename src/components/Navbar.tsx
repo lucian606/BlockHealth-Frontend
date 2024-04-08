@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface NavbarPageInterface {
@@ -42,6 +43,13 @@ function navbarPage(page: NavbarPageInterface, currentPage: string) {
 }
 
 export default function Navbar(props: NavbarProps) {
+	const [hideNavbar, setHideNavbar] = useState(true);
+	const toggleNavbar = () => {
+		console.log("Toggling navbar to:");
+		setHideNavbar(!hideNavbar);
+		console.log(hideNavbar);
+	};
+
 	return (
 		<nav className="border-gray-200 bg-gray-900">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -65,6 +73,7 @@ export default function Navbar(props: NavbarProps) {
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 17 14"
+						onClick={toggleNavbar}
 					>
 						<path
 							stroke="currentColor"
@@ -76,7 +85,10 @@ export default function Navbar(props: NavbarProps) {
 					</svg>
 				</button>
 				<div
-					className="hidden w-full md:block md:w-auto"
+					className={
+						"w-full md:block md:w-auto" +
+						(hideNavbar ? " hidden" : "")
+					}
 					id="navbar-default"
 				>
 					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-80 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-gray-900">

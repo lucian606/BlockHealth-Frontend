@@ -1,12 +1,13 @@
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { diagnosesUrl, authUrl, medicNavbarPages } from "../../utils";
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
 import ErrorCard from "../../components/ErrorCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
-export default function CreateDiagnoisPage() {
+export default function CreateDiagnosisPage() {
 	const { user } = useAuth();
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function CreateDiagnoisPage() {
 	const [patientName, setPatientName] = useState<String>("");
 	const [patientMail, setPatientMail] = useState<String>("");
 	const [error, setError] = useState<string>("");
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const loactionRef = useRef<HTMLInputElement>(null);
 	const diagnosisRef = useRef<HTMLTextAreaElement>(null);
@@ -25,15 +27,19 @@ export default function CreateDiagnoisPage() {
 				console.log(response.data);
 				setPatientName(response.data.displayName);
 				setPatientMail(response.data.email);
+				setLoading(false);
 			})
 			.catch((error) => {
 				console.log(error);
+				setError(error.message);
+				setLoading(false);
 			});
 	}, []);
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
+		setLoading(true);
 		const location = loactionRef.current?.value;
 		const diagnosisDetails = diagnosisRef.current?.value;
 		const jwt = user?.jwt;
@@ -64,7 +70,26 @@ export default function CreateDiagnoisPage() {
 			.catch((err) => {
 				console.log(err);
 				setError(err.message);
+				setLoading(false);
 			});
+	}
+
+	if (loading) {
+		return (
+			<div className="flex flex-col min-h-screen bg-gray-800">
+				<Navbar pages={medicNavbarPages} currentPage="Patients" />
+				<div className="flex flex-col items-center justify-center px-6 py-10 mx-auto">
+					<div className="w-full bg-gray-900 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
+						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+							<h1 className="text-2xl font-bold leading-tight tracking-tight text-white">
+								Add diagnosis
+							</h1>
+							<LoadingSpinner />
+						</div>
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	return (

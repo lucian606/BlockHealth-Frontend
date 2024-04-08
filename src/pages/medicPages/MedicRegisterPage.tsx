@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { registerUrl } from "../../utils";
 import ErrorCard from "../../components/ErrorCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function MedicRegisterPage() {
 	const nameRef = useRef<HTMLInputElement>(null);
@@ -11,11 +12,15 @@ export default function MedicRegisterPage() {
 	const confirmPasswordRef = useRef<HTMLInputElement>(null);
 	const specialtyRef = useRef<HTMLInputElement>(null);
 	const licenseNumberRef = useRef<HTMLInputElement>(null);
+
 	const [error, setError] = useState<string>("");
+	const [loading, setLoading] = useState<boolean>(false);
+
 	const navigate = useNavigate();
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		setLoading(true);
 
 		const displayName = nameRef.current?.value;
 		const email = emailRef.current?.value;
@@ -53,7 +58,33 @@ export default function MedicRegisterPage() {
 			.catch((err) => {
 				console.log(err);
 				setError(err.response.data.error);
+				setLoading(false);
 			});
+	}
+
+	if (loading) {
+		return (
+			<section className="min-h-screen bg-gray-900 overflow-auto">
+				<div className="flex flex-col items-center justify-center px-6 py-10 mx-auto">
+					<p className="flex items-center mb-6 text-2xl font-semibold text-white">
+						<img
+							className="w-8 h-8 mr-2"
+							src="/logo.svg"
+							alt="logo"
+						/>
+						BlockHealth
+					</p>
+					<div className="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
+						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+							<h1 className="text-2xl font-bold leading-tight tracking-tight text-white">
+								Create a medic account
+							</h1>
+							<LoadingSpinner />
+						</div>
+					</div>
+				</div>
+			</section>
+		);
 	}
 
 	return (
