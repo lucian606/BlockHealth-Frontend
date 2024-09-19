@@ -1,4 +1,6 @@
-export const backendUrl:string = "http://blockhealth-backend:5000";
+export const backendUrl: string = import.meta.env.BACKEND_URL || "http://localhost:5000";
+
+console.log("Backend URL: ", backendUrl);
 
 export const authUrl:string = `${backendUrl}/api/auth`;
 export const registerUrl:string = `${backendUrl}/api/auth/register`;
