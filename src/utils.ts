@@ -1,4 +1,4 @@
-export const backendUrl: string = import.meta.env.BACKEND_URL || "http://localhost:5000";
+export const backendUrl: string = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 console.log("Backend URL: ", backendUrl);
 
